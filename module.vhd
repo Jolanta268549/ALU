@@ -70,8 +70,8 @@ reg: process(clk, nreset)
     if (nreset='0')then   
         result_temp_reg<= (others =>'0');
         borrow <= '0';
-    elsif (clk'event and clk ='0') then -- dane ustawiane na zboczu opadaj¹cym
-        result_temp_reg <= result_temp; -- wartoœæ rejetru na wyjœcie
+    elsif (clk'event and clk ='0') then -- dane ustawiane na zboczu opadajacym
+        result_temp_reg <= result_temp; -- wartoÅ“Ã¦ rejetru na wyjÅ“cie
        
         if (op= "1001" and u_a<u_b) then --odejmowanie 
                 borrow <= '1'; --konieczny bit pozyczki jesli odjemna jest mniejsza od odjemnika
@@ -99,21 +99,21 @@ process(op, u_a, u_b)
         when "0011" =>    --not na argumencie u_a
             result_temp <= "11111111" &(not u_a);   
            
-        when "0100" => --porównanie a=b
+        when "0100" => --porownanie a=b
             if u_a = u_b then
             result_temp <= "1111111111111111";
             else
             result_temp <= "0000000000000000";
             end if;
            
-        when "0101" => --porównanie a>b
+        when "0101" => --porownanie a>b
             if u_a > u_b then
             result_temp <= "1111111111111111";
             else
             result_temp <= "0000000000000000";
             end if;
            
-        when "0110" => --porównanie a<b
+        when "0110" => --porownanie a<b
             if u_a < u_b then
             result_temp <= "1111111111111111";
             else
@@ -133,7 +133,7 @@ process(op, u_a, u_b)
         when "1010" => --dzielenie
             result_temp <=  "00000000" & divide ( u_a , u_b ); --dzielenie
            
-        when "1011" => --mno¿enie
+        when "1011" => --mnozenie
             result_temp <= mul (u_a, u_b);
        
         when others =>
